@@ -1,0 +1,32 @@
+opcodes={"add":"00000","sub":"00001","mov1":"00010","mov2":"00011","ld":"00100","st":"00101","mul":"00110","div":"00111","rs":"01000","ls":"01001","xor":"01010","and":"01100","not":"01101","cmp":"01110","jmp":"01111","jlt":"11100","jgt":"11101","je":"11111","je":"11010"}
+register={"R0":"000","R1":"001","R2":"010","R3":"011","R4":"100","R5":"101","R6":"110","FLAGS":"111"}
+def dectobinary(number):
+    a=int(number)
+    b=bin(a)
+    c=str(b)[2:]
+    numberofdig=len(c)
+    d=""
+    for i in range(0,7-numberofdig):
+        d=d+"0"
+    d=d+c
+    return d
+inputfil=open('input.txt','r')
+l=inputfil.readlines()
+l1=[ele.split(' ') for ele in l]
+l2=[]
+l3proper=[]
+j=0
+for i in range(len(l1)):
+    if(l1[i]!=['\n']):
+        l3proper.append(l1[i])
+        l2.append(j)
+        j+=1
+lbinadrr=[dectobinary(str(ele)) for ele in l2]
+#l3proper=[ele for ele in l3proper]
+for i in range(len(l3proper)):
+    if(l3proper[i][-1][-1]=='\n'):
+        temp=l3proper[i][-1][:-1]
+        l3proper[i][-1]=temp
+print(lbinadrr)
+print(l3proper)
+
