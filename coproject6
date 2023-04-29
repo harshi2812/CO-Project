@@ -32,7 +32,7 @@ print(l3proper)
 def simplearithemetic(l):
     opcode1=opcodes[l[0]]
     d=""
-    if(l[0]=="cmp" or l[0]=="not"):
+    if l[0] in ["cmp", "not", "div"]:
         reg1=register[l[1]]
         reg2=register[l[2]]
         d=opcode1+"00000"+reg1+reg2
