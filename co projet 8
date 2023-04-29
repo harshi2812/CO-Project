@@ -51,21 +51,20 @@ def movshift(l):
     if(l[0]=="rs" or l[0]=="ls"):
         opcode1=opcodes[l[0]]
         reg1=register[l[1]]
-        imme=dectobinary(l[2])
-        d=opcode1+"_"+"0"+"_"+reg1+"_"+imme
+        imme=dectobinary(l[2][1:]) # remove the '$' sign from the immediate value
+        d=opcode1+"0"+reg1+imme
     else:
         if(l[2].isnumeric()==True):
             opcode1=opcodes["mov1"]
             reg1=register[l[1]]
             imme1=dectobinary(l[2])
-            d=opcode1+"_"+"0"+"_"+reg1+"_"+imme1
+            d=opcode1+"0"+reg1+imme1
         else:
             opcode1=opcodes["mov2"]
             reg1=register[l[1]]
             reg2=register[l[2]]
-            d=opcode1+"_"+"000"+"_"+reg1+"_"+reg2
-           
-    return d 
+            d=opcode1+"000"+reg1+reg2
+    return d
 lout=[simplearithemetic(ele) for ele in l3proper]
 #lout=[movshift(ele) for ele in l3proper]
 print(lout)
