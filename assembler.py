@@ -213,3 +213,63 @@ def errorgen(l):
         if(operandcheck(l)==1 and l[0]!="mov"):
             le.append(-7)
     return le
+def writeerror(l,cnt):
+    for i in l:
+        if(i==-1):
+            print("Error:overflow at "+str(cnt))
+        if(i==-2):
+            print("Error:resgister does not exist at "+str(cnt))
+        if(i==-3):
+            print("Error:num of operands is incorrect at "+str(cnt))
+        if(i==-4):
+            print("Error:label does not exists at "+str(cnt))
+        if(i==-5):
+            print("Error:variable does not exists at "+str(cnt))
+        if(i==-6):
+            print("Error:invalid immediate at "+str(cnt))
+        if(i==-7):
+            print("Error:opcode does not exist at "+str(cnt))
+cnt=1
+def flagerror(l):
+    if(l[0] in ["add","sub","mov","ld","mul","xor","or","and","not"]):
+        if(l[1]=="FLAGS"):
+            return 1
+    return 0
+for i in range(0,len(l3proper)):
+    if(":" in l3proper[i][0]):
+        if(flagerror(l3proper[i][1:])==1):
+            print("Cannot manipulate value in flag at line "+str(cnt))
+            break
+    if(flagerror(l3proper[i])==1):
+        print("Cannot manipulate value in flag at line "+str(cnt))
+        break
+    if(i==len(l3proper)-1):
+        if("hlt" not in l3proper[i]):
+            print("Halt not in the code")
+            break
+    if("hlt" in l3proper[i]):
+        if(i!=len(l3proper)-1):
+            print("Halt not the last instruction")
+            break
+    if(i>0 and "var" in l3proper[i] and "var" not in l3proper[i-1]):
+        print("Variable not in beginning in line"+str(cnt))
+        break
+    le=errorgen(l3proper[i])
+    if(len(le)!=0):
+        writeerror(le,cnt)
+        print(l3proper[i])
+        break
+    if(":" in l3proper[i][0]):
+        if(l3proper[i][1]=="hlt"):
+            print(opcodes[l3proper[i][1]]+"0"*11)
+        else:
+            convmachinecode(l3proper[i][1:])
+    if(l3proper[i][0]=="jmp" or l3proper[i][0]=="jlt" or l3proper[i][0]=="jgt" or l3proper[i][0]=="je"):
+        print(jumpsta(l3proper[i]))
+    if(l3proper[i][0]=="hlt"):
+        print(opcodes[l3proper[i][0]]+"0"*11)
+    else:
+        convmachinecode(l3proper[i])
+    cnt=cnt+1
+#print(l1)
+#print(l3proper)
