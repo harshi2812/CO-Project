@@ -15,8 +15,7 @@ def dectobinary(number):
     d=d+c
     return d
 #inputfil=open('input.txt','r')
-inputfil=open('input.txt','r')
-l=inputfil.readlines()
+l=sys.stdin.readlines()
 l1=[ele.split() for ele in l]
 l3proper=[]
 for i in range(len(l1)):
