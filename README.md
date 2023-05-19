@@ -1,8 +1,8 @@
 # CO-Project
 Co-project to convert ISA assembly language to Opcode(binary code)-IIITD
  Done by:
- Harshil Handoo-2022206
  Kartik Prasad-2022240
+ Harshil Handoo-2022206
  Harshit Sagar-2022210
  MAHANAMA SIRIWARDHANA-2022271
  It reads an input file called "input.txt" which contains assembly instructions and generates the corresponding machine code in an output file called "out.txt".
